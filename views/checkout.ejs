@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkout page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+</head>
+
+<body>
+
+    <main>
+        <div class="container pb-5">
+
+            <div class="py-1 text-center"> <img class="d-block mx-auto mb-4"
+                    src="https://hackerkernel.com/front_asset/assets/img/HKLogo.png" alt="" width="72" height="72">
+                <h1 class="h2">Checkout Page</h1>
+
+            </div>
+            <div class="row g-5">
+                <div class="col-md-5 col-lg-5 order-md-last">
+                    <h4 class="d-flex justify-content-between align-items-center mb-3"> <span class="text-primary">Your
+                            cart</span> <span class="badge bg-primary rounded-pill count_items"></span> </h4>
+                    <ul class="list-group mb-3 cart_body"></ul>
+                    <div class="total_price py-2"></div>
+                    <form class="card p-2">
+                        <div class="input-group"> <input type="text" class="form-control" placeholder="Promo code">
+                            <button type="submit" class="btn btn-secondary">Redeem</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-7 col-lg-7">
+                    <h4 class="mb-3">Billing address</h4>
+                    <div class="row g-3">
+                        <div class="col-12"> <label for="fullName" class="form-label">Full Name</label> <input
+                                type="text" class="form-control" id="fullName" placeholder="John Doe" value=""
+                                required="">
+                            <div class="invalid-feedback">
+                                Valid name is required.
+                            </div>
+                        </div>
+                        <div class="col-12"> <label for="email" class="form-label">Email </label> <input type="email"
+                                class="form-control" id="email" required placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+                        <div class="col-12"> <label for="phone" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="number" required placeholder="phone number">
+                        </div>
+                        <div class="col-12"> <label for="address" class="form-label">Address</label> <input type="text"
+                                class="form-control" id="address" placeholder="1234 Main St" required="">
+                            <div class="invalid-feedback">
+                                Please enter your shipping address.
+                            </div>
+                        </div>
+                        <div class="col-12"> <label for="address2" class="form-label">Address 2 <span
+                                    class="text-body-secondary">(Optional)</span></label> <input type="text"
+                                class="form-control" id="address2" placeholder="Apartment or suite"> </div>
+                        <div class="col-md-5"> <label for="country" class="form-label">Country</label> <select
+                                class="form-select" id="country" required="">
+                                <option value="">Choose...</option>
+                                <option>India</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid country.
+                            </div>
+                        </div>
+                        <div class="col-md-4"> <label for="state" class="form-label">State</label> <select
+                                class="form-select" id="state" required="">
+                                <option value="">Choose...</option>
+                                <option>Madhaya Pradesh</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please provide a valid state.
+                            </div>
+                        </div>
+                        <div class="col-md-3"> <label for="zip" class="form-label">Zip</label> <input type="text"
+                                class="form-control" id="zip" placeholder="" required="">
+                            <div class="invalid-feedback">
+                                Zip code required.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="form-check"> <input checked type="checkbox" class="form-check-input" id="same-address">
+                        <label class="form-check-label" for="same-address">Shipping address is the same as my
+                            billing
+                            address</label>
+                    </div>
+
+                    <div style="width: 100%;" class="py-3">
+                        <button class=" btn btn-primary btn-lg" id="rzp-button1">Continue to checkout</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+    </main>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script>
+        let userData = null;
+        const getFromStorage = async (key) => {
+            if (typeof window !== "undefined") {
+                const itemStr = localStorage.getItem(key);
+                if (!itemStr) return null;
+
+                const item = JSON.parse(itemStr);
+                const now = new Date();
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key);
+                    return null;
+                }
+
+                return item.value;
+            }
+            return null;
+        };
+        window.onload = async () => {
+            const user = await getFromStorage("user");
+            userData = user;
+            if (!user) {
+                alert("Please login to continue");
+                window.location.replace("/user/login");
+            } else {
+                console.log("User Data:", userData);
+                const fulname = document.querySelector("#fullName").value = userData.name || "";
+                const email = document.querySelector("#email").value = userData.email || "";
+                fetchCartData();
+            }
+        }
+
+
+        const fetchCartData = async () => {
+            try {
+                const response = await fetch("/product/cart/data", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: `Bearer ${userData.accessToken}`,
+                    },
+                });
+                const data = await response.json();
+
+                if (!data.success) {
+                    throw new Error("Failed to fetch cart data");
+                }
+
+                if (data.cartItems.length === 0) {
+                    document.querySelector(".cart_body").innerHTML = "No items found in cart";
+                    document.querySelector(".total_price").innerHTML = "Total Price: 0 Rs";
+                    document.querySelector(".count_items").innerHTML = "0";
+                    window.location.href = "/";
+                    return;
+                }
+                let clutter = "";
+                let totalPrice = 0;
+                data.cartItems.forEach((item) => {
+                    totalPrice += item.product.price * item.quantity;
+                    clutter += ` <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">${item.product.title || ""} </h6> 
+                            </div> <span class="text-body-secondary">${item.product.price} RS</span>
+                        </li>`;
+                });
+
+                document.querySelector(".cart_body").innerHTML = clutter;
+                document.querySelector(".count_items").innerHTML = data.cartItems.length;
+
+                document.querySelector(".total_price").innerHTML = `Total Price: ${totalPrice} Rs`;
+                console.log("Cart Data:", data);
+            } catch (error) {
+                console.error("Error fetching cart data:", error);
+            }
+        };
+
+
+        var orderId;
+        $(document).ready(async function () {
+            const user = await getFromStorage("user");
+            var settings = {
+                "url": "/create/orderId",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                },
+                "data": JSON.stringify({
+                    data: "enb"
+                }),
+
+            };
+
+            //creates new orderId everytime
+            $.ajax(settings).done(function (response) {
+                orderId = response.id;
+                console.log(orderId);
+                $("button").show();
+                var options = {
+                    "key": "rzp_test_R587bOR2CeeUCM", // Enter the Key ID generated from the Dashboar
+                    "currency": "INR",
+                    "name": "HK",
+                    "description": "Test Transaction",
+                    "image": "https://hackerkernel.com/front_asset/assets/img/HKLogo.png",
+                    "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response) {
+                        var settings1 = {
+                            "url": "/api/payment/verify",
+                            "method": "POST",
+                            "timeout": 0,
+                            "headers": {
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${user.accessToken}`
+                            },
+                            "data": JSON.stringify({ response }),
+                        }
+                        $.ajax(settings1).done(function (response) {
+                            console.log(response);
+                            window.location.href = "/paymentsuccess";
+                            window.history.pushState(null, "", "/paymentsuccess");
+                        })
+                    },
+                    "prefill": {
+                        "name": user.name || "No name",
+                        "email": user.email || "No email",
+                        "contact": "+919000090000"
+                    },
+                    "notes": {
+                        "address": "We can add address here",
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response) {
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+                });
+                document.getElementById('rzp-button1').onclick = function (e) {
+                    if (!inputFieldsValidation()) {
+                        e.preventDefault();
+                        // return;
+                    }
+                    rzp1.open();
+                    e.preventDefault();
+
+                }
+            });
+
+
+        });
+        const inputFieldsValidation = () => {
+            const fullName = document.querySelector("#fullName").value;
+            const email = document.querySelector("#email").value;
+            const number = document.querySelector("#number").value;
+            const address = document.querySelector("#address").value;
+            // const address2 = document.querySelector("#address2").value;
+            const country = document.querySelector("#country").value;
+            const state = document.querySelector("#state").value;
+            const zip = document.querySelector("#zip").value;
+
+            if (!fullName || !email || !number || !address || !country || !state || !zip) {
+                alert("Please fill all the fields");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+
+</html>

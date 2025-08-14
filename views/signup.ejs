@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous" />
+</head>
+
+<body>
+  <%- include('includes/navbar') %>
+    <div class="container py-3 d-flex justify-content-center align-items-center" style="height: 90vh">
+      <form style="width: 40%" onsubmit="return onSubmit(event)">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" />
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" />
+        </div>
+
+        <span>Gender : </span>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" value="M" checked />
+          <label class="form-check-label">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" value="F" />
+          <label class="form-check-label">Female</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gender" value="O" />
+          <label class="form-check-label">Others</label>
+        </div>
+
+        <div class="py-2">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"></script>
+
+    <script>
+      const saveToStorage = async (
+        key,
+        value,
+        ttl // 30 days in milliseconds
+      ) => {
+        if (typeof window !== "undefined") {
+          const now = new Date();
+
+          const item = {
+            value: value,
+            expiry: now.getTime() + ttl, // ttl in ms
+          };
+
+          localStorage.setItem(key, JSON.stringify(item));
+        }
+      };
+
+      async function onSubmit(event) {
+        event.preventDefault(); // Prevent page reload
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData.entries());
+
+        console.log("Form Data:", data);
+        if (!data.name || !data.email || !data.password) {
+          alert("Please fill all fields");
+          return false;
+        }
+        try {
+          const createUser = await fetch("/user/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+          const response = await createUser.json();
+          if (response.success) {
+            alert("User created successfully");
+            console.log("User created successfully:", response.user);
+            // Save user data to localStorage
+            await saveToStorage("user", response.user, 30 * 24 * 60 * 60 * 1000); // 30 days in milliseconds 30 * 24 * 60 * 60 * 1000
+            window.location.href = "/";
+          } else {
+            throw new Error(response.message || "User creation failed");
+          }
+        } catch (error) {
+          console.error("Error creating user:", error);
+          alert(error.message || "User creation failed");
+        }
+      }
+    </script>
+    <script src="../javascript/comman.js"></script>
+</body>
+
+</html>

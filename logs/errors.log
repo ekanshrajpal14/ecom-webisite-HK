@@ -1,0 +1,204 @@
+2025-08-12 08:22:02 [ERROR]: next is not defined - POST /user/create
+2025-08-12 08:22:37 [ERROR]: Failed to fetch products - POST /user/create
+2025-08-12 08:25:41 [ERROR]: Failed to fetch products - POST /user/create
+2025-08-12 08:27:10 [ERROR]: Failed to fetch products - POST /user/create
+2025-08-12 08:28:52 [ERROR]: Failed to fetch products - POST /user/create
+2025-08-12 08:29:30 [ERROR]: Failed to create user - POST /user/create
+2025-08-12 08:31:38 [ERROR]: Failed to create user - POST /user/create
+2025-08-12 08:35:29 [ERROR]: Failed to create user - POST /user/create
+2025-08-12 08:36:10 [ERROR]: Validation error - POST /user/create
+2025-08-12 09:29:43 [ERROR]: data is not defined - GET /product/create
+2025-08-12 09:31:52 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <title><%=title%></title>
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:31:55 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <title><%=title%></title>
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:44 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <title><%=title%></title>
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:55 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <title><%=title%></title>
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:55 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <!-- <title><%=title%></title> -->
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:55 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <!-- <title><%=title%></title> -->
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:55 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <!-- <title><%=title%></title> -->
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:32:56 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\products.ejs:6
+    4|     <meta charset="UTF-8" />
+    5|     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ >> 6|     <!-- <title><%=title%></title> -->
+    7|     <link
+    8|       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+    9|       rel="stylesheet"
+
+title is not defined - GET /product/list/all
+2025-08-12 09:34:11 [ERROR]: Table 'ecom.products' doesn't exist - GET /product/list/all
+2025-08-12 11:57:34 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:29
+    27|           class="form-control" 
+    28|           placeholder="Search by title or category" 
+ >> 29|           value="<%= search || '' %>" 
+    30|         />
+    31|         <button type="submit" class="btn btn-primary">Search</button>
+    32|       </form>
+
+search is not defined - GET /
+2025-08-12 11:57:34 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:29
+    27|           class="form-control" 
+    28|           placeholder="Search by title or category" 
+ >> 29|           value="<%= search || '' %>" 
+    30|         />
+    31|         <button type="submit" class="btn btn-primary">Search</button>
+    32|       </form>
+
+search is not defined - GET /
+2025-08-12 11:57:57 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:33
+    31|           class="form-control" 
+    32|           placeholder="Search by title or category" 
+ >> 33|           value="<%= search || '' %>" 
+    34|         />
+    35|         <button type="submit" class="btn btn-primary">Search</button>
+    36|       </form>
+
+search is not defined - GET /
+2025-08-12 11:58:03 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:33
+    31|           class="form-control" 
+    32|           placeholder="Search by title or category" 
+ >> 33|           value="<%= search || '' %>" 
+    34|         />
+    35|         <button type="submit" class="btn btn-primary">Search</button>
+    36|       </form>
+
+search is not defined - GET /
+2025-08-12 11:58:22 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:33
+    31|           class="form-control" 
+    32|           placeholder="Search by title or category" 
+ >> 33|           value="<%= search || '' %>" 
+    34|         />
+    35|         <button type="submit" class="btn btn-primary">Search</button>
+    36|       </form>
+
+search is not defined - GET /
+2025-08-12 12:08:07 [ERROR]: Sequelize is not defined - GET /product/list/all
+2025-08-12 12:08:44 [ERROR]: Sequelize is not defined - GET /product/list/all
+2025-08-12 12:08:45 [ERROR]: Sequelize is not defined - GET /product/list/all
+2025-08-12 12:08:55 [ERROR]: Sequelize is not defined - GET /product/list/all
+2025-08-12 12:36:56 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\prodInfo.ejs:10
+    8| </head>
+    9| <body>
+ >> 10|     <%= productInfo.description%>
+    11| </body>
+    12| </html>
+
+productInfo is not defined - GET /product/info/19928381-30f2-4a3a-b24e-8f1decce27bb
+2025-08-12 12:51:43 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\prodInfo.ejs:19
+    17|         <img src="..." class="card-img-top" alt="...">
+    18|         <div class="card-body">
+ >> 19|             <h5 class="card-title"> <%= product.title%></h5>
+    20|             <p class="card-text"> <%= product.description%></p>
+    21|             <a href="#" class="btn btn-primary">Add to Cart</a>
+    22|         </div>
+
+Cannot read properties of null (reading 'title') - GET /product/info/...
+2025-08-12 13:39:51 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:40:55 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:41:14 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:41:30 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:42:24 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:42:33 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:42:37 [ERROR]: data is not defined - POST /product/ratings
+2025-08-12 13:44:47 [ERROR]: data is not defined - POST /product/ratings
+2025-08-13 07:00:24 [ERROR]: Failed to lookup view "signup" in views directory "C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views" - GET /user/signup
+2025-08-13 07:10:51 [ERROR]: Invalid email or password - POST /user/login
+2025-08-13 07:13:07 [ERROR]: Validation failed - POST /user/create
+2025-08-13 07:13:20 [ERROR]: Validation failed - POST /user/create
+2025-08-13 07:13:43 [ERROR]: Validation error - POST /user/create
+2025-08-13 08:46:00 [ERROR]: Validation error - POST /user/create
+2025-08-13 08:49:05 [ERROR]: Validation error - POST /user/create
+2025-08-13 08:49:55 [ERROR]: Validation error - POST /user/create
+2025-08-13 09:38:14 [ERROR]: Invalid email or password - POST /user/login
+2025-08-13 10:57:21 [ERROR]: Unauthorized: No token provided - POST /product/ratings
+2025-08-13 10:58:11 [ERROR]: Unauthorized: No token provided - POST /product/ratings
+2025-08-13 11:00:37 [ERROR]: Unauthorized: No token provided - POST /product/ratings
+2025-08-13 11:09:21 [ERROR]: You have already rated this product - POST /product/ratings
+2025-08-13 11:12:00 [ERROR]: You have already rated this product - POST /product/ratings
+2025-08-13 11:14:01 [ERROR]: You have already rated this product - POST /product/ratings
+2025-08-13 12:25:36 [ERROR]: Product ID is required - POST /product/add/cart
+2025-08-13 12:32:58 [ERROR]: Unknown column 'Cart.user_id' in 'where clause' - GET /product/cart/data
+2025-08-13 12:33:25 [ERROR]: Unknown column 'Cart.user_id' in 'where clause' - GET /product/cart/data
+2025-08-13 12:41:37 [ERROR]: Product is not defined - GET /product/cart/data
+2025-08-13 12:41:57 [ERROR]: users is not associated to Cart! - GET /product/cart/data
+2025-08-13 12:42:13 [ERROR]: products is not associated to Cart! - GET /product/cart/data
+2025-08-13 12:55:56 [ERROR]: products is not associated to Cart! - GET /product/cart/data
+2025-08-13 12:57:53 [ERROR]: products is not associated to Cart! - GET /product/cart/data
+2025-08-13 12:58:55 [ERROR]: products is not associated to Cart! - GET /product/cart/data
+2025-08-13 13:00:34 [ERROR]: products.hasMany called with something that's not a subclass of Sequelize.Model - GET /product/cart/data
+2025-08-13 13:01:46 [ERROR]: Cart.belongsTo called with something that's not a subclass of Sequelize.Model - GET /product/cart/data
+2025-08-13 13:03:21 [ERROR]: cart.belongsTo called with something that's not a subclass of Sequelize.Model - GET /product/cart/data
+2025-08-13 13:58:48 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 13:59:31 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 14:00:41 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 14:03:10 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 14:04:50 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 14:05:51 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-13 14:09:46 [ERROR]: Cart.save is not a function - PATCH /product/cart/update
+2025-08-13 14:09:52 [ERROR]: Cannot read properties of null (reading 'quantity') - PATCH /product/cart/update
+2025-08-14 05:23:09 [ERROR]: Unauthorized: No token provided - GET /product/checkout
+2025-08-14 11:09:18 [ERROR]: Unauthorized: No token provided - POST /create/orderId
+2025-08-14 12:11:01 [ERROR]: Unauthorized: No token provided - POST /create/orderId
+2025-08-14 12:13:33 [ERROR]: db.cart.findAl is not a function - POST /create/orderId
+2025-08-14 12:14:08 [ERROR]: Include unexpected. Element has to be either a Model, an Association or an object. - POST /create/orderId
+2025-08-14 12:14:24 [ERROR]: Include unexpected. Element has to be either a Model, an Association or an object. - POST /create/orderId
+2025-08-14 12:15:15 [ERROR]: WHERE parameter "userId" has invalid "undefined" value - POST /create/orderId
+2025-08-14 12:15:31 [ERROR]: WHERE parameter "user_id" has invalid "undefined" value - POST /create/orderId
+2025-08-14 13:17:31 [ERROR]: Failed to lookup view "success" in views directory "C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views" - GET /paymentsuccess
+2025-08-14 13:29:14 [ERROR]: Unauthorized: No token provided - POST /api/payment/verify
+2025-08-14 13:33:53 [ERROR]: Unauthorized: No token provided - GET /paymentsuccess
+2025-08-14 13:50:06 [ERROR]: You have already rated this product - POST /product/ratings

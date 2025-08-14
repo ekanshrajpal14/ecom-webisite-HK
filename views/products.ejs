@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+    crossorigin="anonymous" />
+
+</head>
+
+<body class="bg-light">
+  <%- include('includes/navbar') %>
+    <div class="container py-4">
+
+      <!-- Search & Category Filter Form -->
+      <form method="GET" action="/product/list/all" class="mb-4 row g-2">
+        <div class="col-md-5">
+          <input type="text" name="search" class="form-control" placeholder="Search by title or category"
+            value="<%= search || '' %>" />
+        </div>
+
+        <div class="col-md-4">
+          <select name="category" class="form-select">
+            <option value="">All Categories</option>
+            <% categories.forEach(cat=> { %>
+              <option value="<%= cat %>" <%=selectedCategory===cat ? 'selected' : '' %>>
+                <%= cat %>
+              </option>
+              <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+      </form>
+
+      <% if (products && products.length> 0) { %>
+        <h1 class="mb-4">Products</h1>
+        <div class="d-flex flex-wrap gap-4">
+          <% products.forEach(product=> { %>
+            <div class="card shadow-sm" style="width: 18rem">
+              <img src="<%= product.image %>" class="card-img-top" alt="<%= product.title %>" />
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= product.title %>
+                </h5>
+                <p class="card-text fw-bold">Price: $<%= product.price %>
+                </p>
+                <a href="/product/info/<%=product.id%>" class="btn btn-primary ">View Details</a>
+                <button data-productId="<%=product.id%>" class="addtocart btn btn-primary mx-2" >Add to cart</button>
+              </div>
+            </div>
+            <% }) %>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+          <nav>
+            <ul class="pagination">
+              <% if (currentPage> 1) { %>
+                <li class="page-item">
+                  <a class="page-link"
+                    href="?page=<%= currentPage - 1 %>&search=<%= search || '' %>&category=<%= selectedCategory || '' %>">Previous</a>
+                </li>
+                <% } %>
+
+                  <% for (let i=1; i <=totalPages; i++) { %>
+                    <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                      <a class="page-link"
+                        href="?page=<%= i %>&search=<%= search || '' %>&category=<%= selectedCategory || '' %>">
+                        <%= i %>
+                      </a>
+                    </li>
+                    <% } %>
+
+                      <% if (currentPage < totalPages) { %>
+                        <li class="page-item">
+                          <a class="page-link"
+                            href="?page=<%= currentPage + 1 %>&search=<%= search || '' %>&category=<%= selectedCategory || '' %>">Next</a>
+                        </li>
+                        <% } %>
+            </ul>
+          </nav>
+        </div>
+
+        <% } else { %>
+          <h1>No Products Found</h1>
+          <% } %>
+    </div>
+
+
+
+    <script>
+      let userData = null;
+      const getFromStorage = async (key) => {
+        if (typeof window !== "undefined") {
+          const itemStr = localStorage.getItem(key);
+          if (!itemStr) return null;
+
+          const item = JSON.parse(itemStr);
+          const now = new Date();
+
+          if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key);
+            return null;
+          }
+
+          return item.value;
+        }
+        return null;
+      };
+      window.onload = async () => {
+        const user = await getFromStorage("user");
+        if (user) {
+          userData = user;
+          console.log("User data from localStorage:", user);
+          document.querySelector(".add_innerHtml").innerHTML = `
+            <button class="btn btn-danger logout" >Logout</button>
+          `;
+        } else {
+          document.querySelector(".add_innerHtml").innerHTML = `
+            <a class="btn btn-warning" href="/user/login">Login</a>
+          `;
+          console.log("No user data found in localStorage.");
+        }
+      };
+      setTimeout(() => {
+        document.querySelector(".logout").onclick = () => {
+          logout();
+        };
+      }, 1000);
+      const logout = async () => {
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("user");
+        }
+        window.location.href = "/";
+      };
+      
+      document.querySelectorAll(".addtocart").forEach((btn)=>{
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const productId = e.target.getAttribute("data-productId");
+          addToCart(productId);
+          console.log("Product ID:", productId);
+        });
+      })
+      
+      
+      const addToCart = async (productId) => {
+        try {
+          const addedToCart = await fetch("/product/add/cart", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${userData.accessToken}`,
+            },
+            body: JSON.stringify({ productId }),
+          });
+
+          const data = await addedToCart.json();
+          if (data.success) {
+            console.log("Product added to cart successfully:", data);
+            alert("Product added to cart successfully");
+          } else {
+            throw new Error(data.message || "Failed to add product to cart");
+          }
+        } catch (error) {
+          alert("Error adding product to cart: " + error.message);
+        }
+      };
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"></script>
+</body>
+
+</html>
