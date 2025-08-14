@@ -1,4 +1,4 @@
-const {Sequelize,DataTypes }= require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize("ecom", "root", "Ekansh123@", {
   host: "localhost",
@@ -6,18 +6,19 @@ const sequelize = new Sequelize("ecom", "root", "Ekansh123@", {
   pool: { max: 5, min: 0, idle: 10000 },
 });
 
-sequelize.authenticate()
-.then(() => {
+sequelize
+  .authenticate()
+  .then(() => {
     console.log("Connection has been established successfully.");
-})
-.catch((err) => {
-  console.log("Unable to connect to the database:", err);
-});
+  })
+  .catch((err) => {
+    console.log("Unable to connect to the database:", err);
+  });
 
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.sequelize.sync({force:false}).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log("Database & tables created!");
 });
 db.users = require("./users.js")(sequelize, DataTypes);
@@ -31,11 +32,22 @@ db.cart.belongsTo(db.users, {
   targetKey: "email", // because we’re linking by email
 });
 
-db.cart.belongsTo(db.products,{
+db.cart.belongsTo(db.products, {
   foreignKey: "product_id",
   targetKey: "id", // because we’re linking by id
-})
+});
 
-
+db.ratings.belongsTo(db.products, {
+  foreignKey: "product_id",
+  targetKey: "id", // because we’re linking by id
+});
+db.ratings.belongsTo(db.users, {
+  foreignKey: "user_email",
+  targetKey: "email",
+});
+db.products.hasMany(db.ratings, {
+  foreignKey: "product_id",
+  as: "ratings",
+});
 
 module.exports = db;

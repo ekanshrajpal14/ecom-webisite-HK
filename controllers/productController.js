@@ -9,7 +9,7 @@ const Cart = db.cart;
 
 const createProduct = async (req, res, next) => {
   try {
-    // const resp = await fetch("https://fakestoreapi.com/products");
+    // const resp = await fetch("https://api.escuelajs.co/api/v1/products?offset=0&limit=30");
     // const data = await resp.json();
     // const products = [];
     // data.forEach(async (product) => {
@@ -19,9 +19,9 @@ const createProduct = async (req, res, next) => {
     //     title,
     //     price,
     //     description,
-    //     category,
-    //     image,
-    //     rating: rating.rate,
+    //     category:category.name,
+    //     image:product.images[0],
+    //     rating: 0,
     //     stock: Math.floor(Math.random() * 100), // Random stock quantity
     //   });
     //   await newProduct.save();

@@ -202,3 +202,48 @@ Cannot read properties of null (reading 'title') - GET /product/info/...
 2025-08-14 13:29:14 [ERROR]: Unauthorized: No token provided - POST /api/payment/verify
 2025-08-14 13:33:53 [ERROR]: Unauthorized: No token provided - GET /paymentsuccess
 2025-08-14 13:50:06 [ERROR]: You have already rated this product - POST /product/ratings
+2025-08-14 15:03:00 [ERROR]: Products is not defined - GET /
+2025-08-14 15:03:16 [ERROR]: Products is not defined - GET /
+2025-08-14 15:03:16 [ERROR]: Products is not defined - GET /
+2025-08-14 15:03:16 [ERROR]: Products is not defined - GET /
+2025-08-14 15:03:16 [ERROR]: Products is not defined - GET /
+2025-08-14 15:10:18 [ERROR]: Could not find matching close tag for "<%=". - GET /
+2025-08-14 15:13:57 [ERROR]: Could not find matching close tag for "<%=". - GET /
+2025-08-14 15:13:57 [ERROR]: Could not find matching close tag for "<%=". - GET /
+2025-08-14 15:13:57 [ERROR]: Could not find matching close tag for "<%=". - GET /
+2025-08-14 15:25:47 [ERROR]: You have already rated this product - POST /product/ratings
+2025-08-14 16:22:36 [ERROR]: Product is not defined - GET /
+2025-08-14 16:22:51 [ERROR]: Product is not defined - GET /
+2025-08-14 16:22:53 [ERROR]: Product is not defined - GET /
+2025-08-14 16:23:07 [ERROR]: Product is not defined - GET /
+2025-08-14 16:23:08 [ERROR]: Product is not defined - GET /
+2025-08-14 16:23:08 [ERROR]: Product is not defined - GET /
+2025-08-14 16:23:10 [ERROR]: ratings is not associated to products! - GET /
+2025-08-14 16:24:37 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:86
+    84|                 <div class="my-3 p-3">
+    85|                   <h2 class="display-5">
+ >> 86|                     <%=item.product.title%>
+    87|                   </h2>
+    88|                   <p class="lead">Ratings - <%=item.rating%>
+    89|                   </p>
+
+Cannot read properties of undefined (reading 'title') - GET /
+2025-08-14 16:31:47 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:92
+    90|                 </div>
+    91|                 <div class="bg-dark shadow-sm mx-auto bg_image_holder"
+ >> 92|                   style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url(<%=item.product.image%>);">
+    93|                 </div>
+    94|               </div>
+    95|               <%}else{%>
+
+Cannot read properties of undefined (reading 'image') - GET /
+2025-08-14 16:31:59 [ERROR]: C:\Users\Ekansh Rajpal\OneDrive\Desktop\test\ecom-test\views\index.ejs:106
+    104|                   </div>
+    105|                   <div class="bg-body-tertiary shadow-sm mx-auto bg_image_holder"
+ >> 106|                     style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;background-image: url(<%=item.product.image%>);">
+    107|                   </div>
+    108|                 </div>
+    109| 
+
+Cannot read properties of undefined (reading 'image') - GET /
+2025-08-14 16:36:52 [ERROR]: Validation error - POST /user/create

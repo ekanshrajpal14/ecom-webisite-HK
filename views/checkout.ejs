@@ -93,6 +93,7 @@
 
                     <div style="width: 100%;" class="py-3">
                         <button class=" btn btn-primary btn-lg" id="rzp-button1">Continue to checkout</button>
+                        <a href="/" class="btn btn-danger btn-lg">Cancel</a>
                     </div>
                 </div>
 
@@ -167,14 +168,15 @@
                     totalPrice += item.product.price * item.quantity;
                     clutter += ` <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">${item.product.title || ""} </h6> 
+                                <h6 class="mb-2">${item.product.title || ""} </h6>
+                                <p >Qyt - ${item.quantity}</p> 
                             </div> <span class="text-body-secondary">${item.product.price} RS</span>
+                            
                         </li>`;
                 });
 
                 document.querySelector(".cart_body").innerHTML = clutter;
                 document.querySelector(".count_items").innerHTML = data.cartItems.length;
-
                 document.querySelector(".total_price").innerHTML = `Total Price: ${totalPrice} Rs`;
                 console.log("Cart Data:", data);
             } catch (error) {
@@ -254,7 +256,7 @@
                 document.getElementById('rzp-button1').onclick = function (e) {
                     if (!inputFieldsValidation()) {
                         e.preventDefault();
-                        // return;
+                        return;
                     }
                     rzp1.open();
                     e.preventDefault();

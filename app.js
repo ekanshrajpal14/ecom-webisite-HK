@@ -22,8 +22,28 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
+
+app.get("/", async (req, res) => {
+
+  const ratedProduct = await db.products.findAll({
+    include: [
+      {
+        model: db.ratings,
+        as: "ratings",
+        required: true, // Ensures only products with ratings are returned
+        include: [
+          {
+            model: db.users,
+            as: "user",
+            attributes: ["name", "email"],
+          },
+        ],
+      },
+    ],
+  });
+  //  res.send(ratedProduct)
+  
+  res.render("index", { title: "Home Page", ratedProduct });
 });
 
 app.post("/create/orderID", authenticateUser, async function (req, res, next) {
@@ -53,7 +73,7 @@ app.post("/create/orderID", authenticateUser, async function (req, res, next) {
     res.send(order);
   });
 });
-app.post("/api/payment/verify", authenticateUser,async (req, res) => {
+app.post("/api/payment/verify", authenticateUser, async (req, res) => {
   const user = req.user;
   if (!user) {
     return res.status(401).json({ success: false, message: "User not authenticated" });
@@ -70,8 +90,7 @@ app.post("/api/payment/verify", authenticateUser,async (req, res) => {
     const emptyCart = await db.cart.destroy({
       where: { user_email: user.email },
     });
-    console.log(emptyCart,1234567);
-    
+    console.log(emptyCart, 1234567);
   }
 
   res.send(response);
@@ -83,12 +102,6 @@ app.get("/paymentsuccess", function (req, res) {
 
 app.use("/user", require("./routes/index.js"));
 app.use("/product", require("./routes/product.js"));
-
-// app.get("/error",(req,res,next)=>{
-//   const err = new Error("This is a test error");
-//   err.statusCode = 500;
-//   next(err);
-// })
 
 app.use(generatedErrors);
 
